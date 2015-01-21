@@ -1,0 +1,2 @@
+# jamjar
+Rails application template
