@@ -190,6 +190,8 @@ development: &default
   secret_key_base: <%= ENV["SECRET_KEY_BASE"] %>
 test:
   <<: *default
+production:
+  <<: *default
 YAML
 
 remove_file "config/database.yml"
