@@ -258,6 +258,7 @@ EXPOSE 3000
 CMD bundle exec puma -p 3000 -e production
   DOCKERFILE
 
+  db_pass = SecureRandom.hex(32)
   file "fig.yml", <<-FIG
 web:
   image: #{docker_tag}:latest
@@ -271,6 +272,11 @@ web:
     - "SECRET_KEY_BASE=#{SecureRandom.hex(32)}"
     - "DEVISE_KEY=#{SecureRandom.hex(32)}"
     - "VIRTUAL_HOST=#{domain}"
+    - "DATABASE_HOST=db"
+    - "DATABASE_NAME=#{db_name}"
+    - "DATABASE_POOL_SIZE=5"
+    - "DATABASE_USERNAME=postgres"
+    - "DATABASE_PASSWORD=#{db_pass}"
 pgdata:
   image: busybox
   volumes:
@@ -281,6 +287,7 @@ db:
     - pgdata
   environment:
     - "LC_ALL=C.UTF-8"
+    - "POSTGRES_PASSWORD=#{db_pass}"
 nginx:
   image: jwilder/nginx-proxy:latest
   ports:
@@ -306,10 +313,10 @@ after_bundle do
 
   # What next?
 
-  - Copy .env.example to .env and change the environment variables
+  - Change the environment variables in .env where appropriate
   - Setup skylight: $ bundle exec skylight setup skylight-key-here
     - https://www.skylight.io/app/setup
-  - Run without docker: $ foreman start
+  - Run #{"without docker" if use_docker}: $ foreman start
   #{"- Run with docker (you'll need fig installed): $ fig up" if use_docker}
   #{"- Set MAINTAINER in the Dockerfile" if use_docker}
   #{"- Look at devise setup instructions (scroll up to gem install)" if use_auth}
