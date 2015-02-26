@@ -237,7 +237,7 @@ rake("db:migrate")
 # Setup docker
 if use_docker
   file "Dockerfile", <<-DOCKERFILE
-FROM ruby:2.1.5
+FROM ruby:2.2.0
 MAINTAINER AddJam
 
 ENV RAILS_ENV production
