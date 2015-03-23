@@ -30,13 +30,14 @@ group :development do
   gem "quiet_assets"
   gem "better_errors"
   gem 'annotate', require: false
-  gem 'byebug'
 end
 
 group :development, :test do
   gem "factory_girl_rails"
   gem "rspec-rails", "~> 3.1.0"
   gem "dotenv-rails"
+  gem 'byebug'
+  gem 'web-console', '~> 2.0'
 end
 
 group :test do
@@ -237,7 +238,7 @@ rake("db:migrate")
 # Setup docker
 if use_docker
   file "Dockerfile", <<-DOCKERFILE
-FROM ruby:2.2.0
+FROM ruby:2.2.1
 MAINTAINER AddJam
 
 ENV RAILS_ENV production
