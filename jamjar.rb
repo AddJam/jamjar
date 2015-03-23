@@ -1,55 +1,55 @@
 # Jam Jar - Rails template used by Add Jam
 # https://github.com/addjam/jamjar
 unless Rails::VERSION::MAJOR >= 4
-  raise "spawnpoint was built for rails 4 and up, please update your rails version"
+  raise 'spawnpoint was built for rails 4 and up, please update your rails version'
 end
 
 # Gemfile & Gems
-remove_file "Gemfile"
-file "Gemfile", <<-RUBY
+remove_file 'Gemfile'
+file 'Gemfile', <<-RUBY
 
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
-gem "rails", "4.2.0"
+gem 'rails', '4.2.0'
 gem 'turbolinks'
-gem 'uglifier'
-gem "pg"
+gem 'uglifier', '~> 1.3.0'
+gem 'pg'
 
-gem "sass", "~> 3.4.9"
-gem "sass-rails"
-gem "bourbon"
+gem 'sass', '~> 3.4.9'
+gem 'sass-rails', '~> 5.0'
+gem 'bourbon'
 gem 'neat'
-gem "jquery-rails"
-gem "coffee-rails"
+gem 'jquery-rails'
+gem 'coffee-rails', '~> 4.1.0'
 
-gem "puma"
+gem 'puma'
 
 group :development do
-  gem "foreman", require: false
-  gem "spring"
-  gem "quiet_assets"
-  gem "better_errors"
+  gem 'foreman', require: false
+  gem 'spring'
+  gem 'quiet_assets'
+  gem 'better_errors'
   gem 'annotate', require: false
 end
 
 group :development, :test do
-  gem "factory_girl_rails"
-  gem "rspec-rails", "~> 3.1.0"
-  gem "dotenv-rails"
+  gem 'factory_girl_rails'
+  gem 'rspec-rails', '~> 3.1.0'
+  gem 'dotenv-rails'
   gem 'byebug'
   gem 'web-console', '~> 2.0'
 end
 
 group :test do
-  gem "shoulda-matchers", "~> 2.7.0", require: false
-  gem "timecop"
-  gem "database_cleaner"
+  gem 'shoulda-matchers', '~> 2.7.0', require: false
+  gem 'timecop'
+  gem 'database_cleaner'
 end
 
 group :production, :staging do
-  gem "rails_12factor"
+  gem 'rails_12factor'
   gem 'therubyracer'
-  gem "skylight"
+  gem 'skylight'
 end
 RUBY
 
